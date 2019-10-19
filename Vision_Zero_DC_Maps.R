@@ -46,7 +46,7 @@ Yearly_Freq <- Bike_Crashes %>% group_by(year(DATE)) %>% summarize(number = n())
 
 
 # Getting ggmap API key and Registering DC map
-register_google(key = "AIzaSyC-BH1Nd08VJnNDqBfQpv8RpEu2FHp0bEs")
+register_google(key = "Your-API-Here")
 DC_map <- ggmap(get_map(location = c(lon = -77.019, lat = 38.9072), zoom = 12, maptype = "roadmap", scale = 2, color = 'color'))
 
 # Reading in table with Intersection I think are the most dangerous from the Vision Zero Dotplot
