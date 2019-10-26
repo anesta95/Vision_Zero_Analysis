@@ -46,7 +46,7 @@ Yearly_Freq <- Bike_Crashes %>% group_by(year(DATE)) %>% summarize(number = n())
 
 
 # Getting ggmap API key and Registering DC map
-register_google(key = "Your-API-Here")
+register_google(key = "Your-Key-Here")
 DC_map <- ggmap(get_map(location = c(lon = -77.019, lat = 38.9072), zoom = 12, maptype = "roadmap", scale = 2, color = 'color'))
 
 # Reading in table with Intersection I think are the most dangerous from the Vision Zero Dotplot
@@ -68,14 +68,16 @@ Vision_Zero_Intersections$Ward <- fct_relevel(Vision_Zero_Intersections$Ward, "O
 theme_dcmap <- function() {
   theme_minimal() +
     theme(text = element_text(family = "Garamond", color = "gray25"),
-          plot.subtitle = element_text(size = 12),
-          plot.caption = element_text(color = "gray30"),
+          plot.title = element_text(size = 24, face = "bold"), 
+          plot.subtitle = element_text(size = 18),
+          plot.caption = element_text(color = "gray30", size = 10),
           plot.background = element_rect(fill = "gray95"),
           plot.margin = unit(c(2, 13, 2, 13), "lines"),
           axis.text = element_blank(),
           axis.ticks = element_blank(),
           axis.line = element_blank(),
-          legend.position = "right"
+          legend.position = "right",
+          legend.text = element_text(color = "gray30", size = 10)
     )
 }
 
@@ -149,11 +151,15 @@ Seasonality_Summary <- ggplot(yearMonth, aes(year, month)) + geom_tile(aes(fill 
   xlab("Year") + ylab("Month") + labs(fill = "# of Crashes", title = "Seasonality of DC Bike Crashes", subtitle = "2012-2019", caption = "Data from https://opendata.dc.gov/datasets") +
   theme_minimal() +
   theme(text = element_text(family = "Garamond", color = "gray25"),
-        plot.subtitle = element_text(size = 12),
+        plot.title = element_text(size = 24, face = "bold"),
+        plot.subtitle = element_text(size = 18),
         plot.caption = element_text(color = "gray30"),
         plot.background = element_rect(fill = "gray95"),
         plot.margin = unit(c(2, 13, 2, 13), "lines"),
-        legend.position = "right"
+        legend.position = "right",
+        legend.text = element_text(size = 12),
+        axis.text = element_text(size = 12),
+        axis.title = element_blank()
   )
 
 # Heatmap 2: Group/Hour
@@ -165,9 +171,13 @@ Ward_Summary <- ggplot(groupSummary, aes(month, WARD)) + geom_tile(aes(fill = N)
   xlab("Month") + ylab("Ward") + labs(fill = "# of Crashes", title = "DC Bike Crashes by Ward", subtitle = "2012-2019", caption = "Data from https://opendata.dc.gov/datasets") +
   theme_minimal() +
   theme(text = element_text(family = "Garamond", color = "gray25"),
-        plot.subtitle = element_text(size = 12),
+        plot.title = element_text(size = 24, face = "bold"),
+        plot.subtitle = element_text(size = 18),
         plot.caption = element_text(color = "gray30"),
         plot.background = element_rect(fill = "gray95"),
         plot.margin = unit(c(2, 13, 2, 13), "lines"),
-        legend.position = "right"
+        legend.position = "right",
+        legend.text = element_text(size = 12),
+        axis.text = element_text(size = 12),
+        axis.title = element_blank()
   )
